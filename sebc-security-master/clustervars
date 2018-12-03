@@ -1,0 +1,16 @@
+export PASSWORD=passw0rd
+export DOMAIN=$(hostname -d | tr [a-z] [A-Z])
+export COUNTRY=US
+export STATE=TX
+export LOCALITY=Austin
+export ORGNAME='Cloudera Inc'
+export ORGUNIT='IT'
+export EMAIL=root@${DOMAIN}
+export CERTS=/etc/openldap/certs
+
+export LDAP_SERVER=bvt-sebc-1.vpc.cloudera.com
+export LDAP_ROOT_DC=sebc
+export LDAP_SEARCH_BASE=dc=sebc,dc=org
+
+export KERBEROS_SERVER=bvt-sebc-1.vpc.cloudera.com
+export KERBEROS_REALM=${DOMAIN}
