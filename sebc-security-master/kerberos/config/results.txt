@@ -1,0 +1,103 @@
+##Worker-3
+
+[root@ip-172-31-59-6 centos]# kinit user1@VINKOS.COM
+Password for user1@VINKOS.COM: 
+[root@ip-172-31-59-6 centos]# klist -a
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user1@VINKOS.COM
+
+Valid starting       Expires              Service principal
+12/03/2018 15:21:13  12/04/2018 15:21:13  krbtgt/VINKOS.COM@VINKOS.COM
+	renew until 12/10/2018 15:21:13
+	Addresses: (none)
+
+
+[root@ip-172-31-59-6 centos]# kinit user2@VINKOS.COM
+Password for user2@VINKOS.COM: 
+[root@ip-172-31-59-6 centos]# klist -a
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user2@VINKOS.COM
+
+Valid starting       Expires              Service principal
+12/03/2018 15:21:28  12/04/2018 15:21:28  krbtgt/VINKOS.COM@VINKOS.COM
+	renew until 12/10/2018 15:21:28
+	Addresses: (none)
+
+
+[root@ip-172-31-59-6 centos]# kinit user3@VINKOS.COM
+Password for user3@VINKOS.COM: 
+[root@ip-172-31-59-6 centos]# klist -a
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user3@VINKOS.COM
+
+Valid starting       Expires              Service principal
+12/03/2018 15:21:45  12/04/2018 15:21:45  krbtgt/VINKOS.COM@VINKOS.COM
+	renew until 12/10/2018 15:21:45
+	Addresses: (none)
+
+
+[root@ip-172-31-59-6 centos]# kinit user4@VINKOS.COM
+Password for user4@VINKOS.COM: 
+[root@ip-172-31-59-6 centos]# klist -a
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user4@VINKOS.COM
+
+Valid starting       Expires              Service principal
+12/03/2018 15:22:00  12/04/2018 15:22:00  krbtgt/VINKOS.COM@VINKOS.COM
+	renew until 12/10/2018 15:22:00
+	Addresses: (none)
+[root@ip-172-31-59-6 centos]#
+
+
+##Master-1
+
+[root@ip-172-31-61-172 centos]# kinit user1@VINKOS.COM
+Password for user1@VINKOS.COM: 
+[root@ip-172-31-61-172 centos]# klist -a
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user1@VINKOS.COM
+
+Valid starting       Expires              Service principal
+12/03/2018 15:18:08  12/04/2018 15:18:08  krbtgt/VINKOS.COM@VINKOS.COM
+	renew until 12/10/2018 15:18:08
+	Addresses: (none)
+
+[root@ip-172-31-61-172 centos]# kinit user2@VINKOS.COM
+Password for user2@VINKOS.COM: 
+[root@ip-172-31-61-172 centos]# klist -a
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user2@VINKOS.COM
+
+Valid starting       Expires              Service principal
+12/03/2018 15:18:18  12/04/2018 15:18:18  krbtgt/VINKOS.COM@VINKOS.COM
+	renew until 12/10/2018 15:18:18
+	Addresses: (none)
+
+[root@ip-172-31-61-172 centos]# kinit user3@VINKOS.COM
+Password for user3@VINKOS.COM: 
+kinit: Password incorrect while getting initial credentials
+
+[root@ip-172-31-61-172 centos]# kinit user3@VINKOS.COM
+Password for user3@VINKOS.COM: 
+[root@ip-172-31-61-172 centos]# klist -a
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user3@VINKOS.COM
+
+Valid starting       Expires              Service principal
+12/03/2018 15:18:38  12/04/2018 15:18:38  krbtgt/VINKOS.COM@VINKOS.COM
+	renew until 12/10/2018 15:18:38
+	Addresses: (none)
+
+
+[root@ip-172-31-61-172 centos]# kinit user4@VINKOS.COM
+Password for user4@VINKOS.COM: 
+[root@ip-172-31-61-172 centos]# klist -a
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user4@VINKOS.COM
+
+Valid starting       Expires              Service principal
+12/03/2018 15:18:53  12/04/2018 15:18:53  krbtgt/VINKOS.COM@VINKOS.COM
+	renew until 12/10/2018 15:18:53
+	Addresses: (none)
+
+
