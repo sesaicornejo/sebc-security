@@ -1,0 +1,136 @@
+## Challenge
+
+- Proof that no sssd, kerberos, tls, etc. are created
+- Send me FQDNs of hosts I will issue certs
+- Kerberize cluster
+- Enable TLS for CM, CM agents, Hive, HDFS (including DNs), and YARN!
+
+- You have an organization that consists of two lines of business:
+    - Finance
+    - HR
+- The organization has TWO types of roles PER line of business: managers and analysts
+- EACH line of business has a SINGLE managed database named after itself
+- Managers can create and write tables on their own database and read data from all databases
+- Analysts can only read data on their line of business database
+- The data for each line of business will be encrypted in HDFS
+- Create all the Sentry SQL you need to restrict access (you can name the groups, databases, roles, etc. whatever you want provided it is clear what each represents)
+
+- Describe what is required to ensure data is encrypted and ensure managers and analysts can read data from HDFS and Hive
+- Describe the capabilities of Navigator Audit, Lineage, and Metadata. What is it useful for?
+- Which technology would you use for encrypting Kafka, Kudu and Flume volumes?
+
+
+Nada Instalado 
+	---- w1
+		[root@ip-172-31-62-166 centos]# kinit user1@VINKOS.COM
+		kinit: Cannot find KDC for realm "VINKOS.COM" while getting initial credentials
+		[root@ip-172-31-62-166 centos]# kinit 
+		kinit: Configuration file does not specify default realm when parsing name root
+
+		[root@ip-172-31-62-166 centos]# id user1
+		id: user1: no such user
+
+		[root@ip-172-31-62-166 centos]# ls -la /opt/cloudera/security/
+		ls: cannot access /opt/cloudera/security/: No such file or directory
+
+		[root@ip-172-31-62-166 centos]# ls /etc/sssd/
+		conf.d
+
+ 	---- w2
+		[root@ip-172-31-63-181 centos]# kinit user1@VINKOS.COM
+		kinit: Cannot find KDC for realm "VINKOS.COM" while getting initial credentials
+		[root@ip-172-31-63-181 centos]# kinit
+		kinit: Configuration file does not specify default realm when parsing name root
+
+		[root@ip-172-31-63-181 centos]# id user1 
+		id: user1: no such user
+		
+		[root@ip-172-31-63-181 centos]# ls -la /opt/cloudera/security/
+		ls: cannot access /opt/cloudera/security/: No such file or directory
+		
+		[root@ip-172-31-63-181 centos]# ls -la /etc/sssd/
+		total 12
+		drwx--x--x    3 sssd sssd   20 Sep 26 20:31 .
+		drwxr-xr-x. 112 root root 8192 Dec  6 23:04 ..
+		drwx--x--x    2 sssd sssd    6 Jun 27 12:57 conf.d
+
+
+
+## Caso de Uso 
+
+
+## Crear zona encriptada HDFS
+
+	hadoop key create keyFinaz
+	hdfs hdfs crypto -createZone -keyName keyFinaz -path /user/hive/finanzas
+
+	hadoop key create keyHR
+	hdfs hdfs crypto -createZone -keyName keyHR -path /user/hive/recursos_humanos
+
+## Sentry
+
+Databases : 
+	1.finanzas
+	2.recurso_humanos
+
+1.- Instalamos Sentry
+	1.1 ponemos el Grupo Admins con el usuario admin
+2.- Creamos el Role admins y lo asociamos al Grupo Admins
+3.- Creamos el Role gfinz_managers y lo asociamos al Grupo gfinz_managers de AC
+4.- Creamos el Role gfinz_analysts y lo asociamos el Grupo gfinz_analysts de AC
+5.- Creamos el Role ghr_managers y lo asociamos al Grupo ghr_managers de AC
+6.- Creamos el Role ghr_analysts y lo asociamos el Grupo ghr_analysts de AC
+7.- asociamos los permisos a cada Role
+
+
+1. Creamos los Roles
+
+   - CREATE ROLE gfinz_managers;
+   - CREATE ROLE gfinz_analysts;
+   - CREATE ROLE ghr_managers;
+   - CREATE ROLE ghr_analysts;
+   
+2. Asociamos los Roles a los Grupos del AC
+
+   - GRANT ROLE gfinz_managers TO GROUP gfinz_managers; 
+   - GRANT ROLE ghr_managers TO GROUP ghr_managers; 
+   - GRANT ROLE gfinz_analysts TO GROUP gfinz_analysts; 
+   - GRANT ROLE ghr_analysts TO GROUP ghr_analysts; 
+
+3. Asignamos accesos a los Roles
+
+   - GRANT ALL ON DATABASE finanzas TO ROLE gfinz_managers;
+   - GRANT ALL ON DATABASE recurso_humanos TO ROLE ghr_managers;
+   
+   - GRANT SELECT ON DATABASE recurso_humanos TO ROLE gfinz_managers;
+   - GRANT SELECT ON DATABASE finanzas TO ROLE ghr_managers;
+   
+   - GRANT SELECT ON DATABASE recurso_humanos TO ROLE ghr_analysts;
+   - GRANT SELECT ON DATABASE finanzas TO ROLE gfinz_analysts;
+
+
+### Describe the capabilities of Navigator Audit, Lineage, and Metadata. What is it useful for?
+
+	Audit:
+
+	Nos permiter tener un historial de todos las peticiones dentro del cluster Cloudera
+		- Que se intento ejecutar
+		- Quien lo intento ejecutar
+		- Estatus
+	
+	Linage:
+
+	Nos permiter ver de forma automatica mediante un diagrama, la relacion de datos a diferentes niveles. Para validar si las fuentes son correctas
+
+
+	Metadata:
+
+	Nos permite indexar, todo el contenido de HDFS, esctructura de tablas (columnas, nombre de tablas) las cuales pueden ser editadas para su mejor entendimiento, para le gente de negocio,
+
+	Nos permite asignar palabras clave para asociar la busqueda 
+
+### Which technology would you use for encrypting Kafka, Kudu and Flume volumes?
+
+	Navigator Encrypt:
+		Es utilizado para encriptar volumenes que no son HDFS
+
