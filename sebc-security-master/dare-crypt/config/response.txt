@@ -1,1 +1,21 @@
-Add your response here
+
+1.- Renombrar el directorio /user/hive/warehouse.
+	
+	kinit -k -t /run/cloudera-scm-agent/hdfs.keytab hdfs/ip-172-31-62-4.ec2.internal@VINKOS.COM
+	hdfs dfs -mv /user/hive/warehouse /user/hive/warehouse_old
+
+2.- Crear de nuevo el directorio, pero ahora con encriptación 
+
+	hdfs dfs -mkdir /user/hive/warehouse
+
+	hadoop key create keyWarehouse
+
+	hdfs hdfs crypto -createZone -keyName keyWarehouse -path /user/hive/warehouse
+
+3.- Una vez encriptado el directorio warehouse, movemos el contenido de warehouse_old 
+
+    hadoop -distcp /user/hive/warehouse_old/* /user/hive/warehouse/
+
+4.- Terminado el copiado de la información al directorio encriptado podemos eliminar el directorio warehouse_old
+	
+	hdfs dfs -rm -r /user/hive/warehouse_old
