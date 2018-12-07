@@ -1,0 +1,217 @@
+beeline> !connect jdbc:hive2://ip-172-31-59-6.ec2.internal:10000/default;principal=hive/_HOST@VINKOS.COM;ssl=true;sslTrustStore=/opt/cloudera/security/pki/truststore.jks;trustStorePassword=passw0rd
+Connecting to jdbc:hive2://ip-172-31-59-6.ec2.internal:10000/default;principal=hive/_HOST@VINKOS.COM;ssl=true;sslTrustStore=/opt/cloudera/security/pki/truststore.jks;trustStorePassword=passw0rd
+Connected to: Apache Hive (version 1.1.0-cdh5.15.1)
+Driver: Hive JDBC (version 1.1.0-cdh5.15.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+
+: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> CREATE ROLE dbas;
+INFO  : Compiling command(queryId=hive_20181206120909_fdb11eef-75a6-48d2-852d-6f35759cdebc): CREATE ROLE dbas
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206120909_fdb11eef-75a6-48d2-852d-6f35759cdebc); Time taken: 0.07 seconds
+INFO  : Executing command(queryId=hive_20181206120909_fdb11eef-75a6-48d2-852d-6f35759cdebc): CREATE ROLE dbas
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206120909_fdb11eef-75a6-48d2-852d-6f35759cdebc); Time taken: 0.094 seconds
+INFO  : OK
+No rows affected (0.175 seconds)
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> GRANT ROLE dbas TO GROUP admins;
+INFO  : Compiling command(queryId=hive_20181206121111_7131a240-0bc9-437b-b5d7-86a1bd9f9f2d): GRANT ROLE dbas TO GROUP admins
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206121111_7131a240-0bc9-437b-b5d7-86a1bd9f9f2d); Time taken: 0.083 seconds
+INFO  : Executing command(queryId=hive_20181206121111_7131a240-0bc9-437b-b5d7-86a1bd9f9f2d): GRANT ROLE dbas TO GROUP admins
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206121111_7131a240-0bc9-437b-b5d7-86a1bd9f9f2d); Time taken: 0.05 seconds
+INFO  : OK
+No rows affected (0.143 seconds)
+
+: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> GRANT ALL ON Server server1 TO ROLE dbas WITH GRANT OPTION;
+INFO  : Compiling command(queryId=hive_20181206123939_b3aeb24b-8cf6-4ee9-9a68-515e8b86cf03): GRANT ALL ON Server server1 TO ROLE dbas WITH GRANT OPTION
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206123939_b3aeb24b-8cf6-4ee9-9a68-515e8b86cf03); Time taken: 0.054 seconds
+INFO  : Executing command(queryId=hive_20181206123939_b3aeb24b-8cf6-4ee9-9a68-515e8b86cf03): GRANT ALL ON Server server1 TO ROLE dbas WITH GRANT OPTION
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206123939_b3aeb24b-8cf6-4ee9-9a68-515e8b86cf03); Time taken: 0.008 seconds
+INFO  : OK
+No rows affected (0.071 seconds)
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> show databases;
+INFO  : Compiling command(queryId=hive_20181206121212_79bdd0a9-7a62-4fab-8b5c-187fda6d6489): show databases
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:database_name, type:string, comment:from deserializer)], properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206121212_79bdd0a9-7a62-4fab-8b5c-187fda6d6489); Time taken: 0.057 seconds
+INFO  : Executing command(queryId=hive_20181206121212_79bdd0a9-7a62-4fab-8b5c-187fda6d6489): show databases
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206121212_79bdd0a9-7a62-4fab-8b5c-187fda6d6489); Time taken: 0.096 seconds
+INFO  : OK
++----------------+--+
+| database_name  |
++----------------+--+
+| default        |
++----------------+--+
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> CREATE TABLE IF NOT EXISTS table1 ( ORDERNUMBER String,QUANTITYORDERED String,PRICEEACH String,ORDERLINENUMBER String,SALES String,ORDERDATE String,STATUS String,QTR_ID String,MONTH_ID String,YEAR_ID String,PRODUCTLINE String,MSRP String,PRODUCTCODE String,CUSTOMERNAME String,PHONE String,ADDRESSLINE1 String,ADDRESSLINE2 String,CITY String,STATE String,POSTALCODE String,COUNTRY String,TERRITORY String,CONTACTLASTNAME String,CONTACTFIRSTNAME String) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' STORED AS TEXTFILE;
+INFO  : Compiling command(queryId=hive_20181206133939_71b4e08b-be89-4e06-b474-12561dc2058c): CREATE TABLE IF NOT EXISTS table1 ( ORDERNUMBER String,QUANTITYORDERED String,PRICEEACH String,ORDERLINENUMBER String,SALES String,ORDERDATE String,STATUS String,QTR_ID String,MONTH_ID String,YEAR_ID String,PRODUCTLINE String,MSRP String,PRODUCTCODE String,CUSTOMERNAME String,PHONE String,ADDRESSLINE1 String,ADDRESSLINE2 String,CITY String,STATE String,POSTALCODE String,COUNTRY String,TERRITORY String,CONTACTLASTNAME String,CONTACTFIRSTNAME String) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' STORED AS TEXTFILE
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206133939_71b4e08b-be89-4e06-b474-12561dc2058c); Time taken: 0.084 seconds
+INFO  : Executing command(queryId=hive_20181206133939_71b4e08b-be89-4e06-b474-12561dc2058c): CREATE TABLE IF NOT EXISTS table1 ( ORDERNUMBER String,QUANTITYORDERED String,PRICEEACH String,ORDERLINENUMBER String,SALES String,ORDERDATE String,STATUS String,QTR_ID String,MONTH_ID String,YEAR_ID String,PRODUCTLINE String,MSRP String,PRODUCTCODE String,CUSTOMERNAME String,PHONE String,ADDRESSLINE1 String,ADDRESSLINE2 String,CITY String,STATE String,POSTALCODE String,COUNTRY String,TERRITORY String,CONTACTLASTNAME String,CONTACTFIRSTNAME String) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' STORED AS TEXTFILE
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206133939_71b4e08b-be89-4e06-b474-12561dc2058c); Time taken: 0.267 seconds
+INFO  : OK
+No rows affected (0.367 seconds)
+
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> CREATE TABLE IF NOT EXISTS table2 ( ORDERNUMBER String,QUANTITYORDERED String,PRICEEACH String,ORDERLINENUMBER String,SALES String,ORDERDATE String,STATUS String,QTR_ID String,MONTH_ID String,YEAR_ID String,PRODUCTLINE String,MSRP String,PRODUCTCODE String,CUSTOMERNAME String,PHONE String,ADDRESSLINE1 String,ADDRESSLINE2 String,CITY String,STATE String,POSTALCODE String,COUNTRY String,TERRITORY String,CONTACTLASTNAME String,CONTACTFIRSTNAME String) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' STORED AS TEXTFILE;
+INFO  : Compiling command(queryId=hive_20181206133838_f347c0dc-2def-40f3-8569-408909ca0c1a): CREATE TABLE IF NOT EXISTS table2 ( ORDERNUMBER String,QUANTITYORDERED String,PRICEEACH String,ORDERLINENUMBER String,SALES String,ORDERDATE String,STATUS String,QTR_ID String,MONTH_ID String,YEAR_ID String,PRODUCTLINE String,MSRP String,PRODUCTCODE String,CUSTOMERNAME String,PHONE String,ADDRESSLINE1 String,ADDRESSLINE2 String,CITY String,STATE String,POSTALCODE String,COUNTRY String,TERRITORY String,CONTACTLASTNAME String,CONTACTFIRSTNAME String) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' STORED AS TEXTFILE
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206133838_f347c0dc-2def-40f3-8569-408909ca0c1a); Time taken: 0.09 seconds
+INFO  : Executing command(queryId=hive_20181206133838_f347c0dc-2def-40f3-8569-408909ca0c1a): CREATE TABLE IF NOT EXISTS table2 ( ORDERNUMBER String,QUANTITYORDERED String,PRICEEACH String,ORDERLINENUMBER String,SALES String,ORDERDATE String,STATUS String,QTR_ID String,MONTH_ID String,YEAR_ID String,PRODUCTLINE String,MSRP String,PRODUCTCODE String,CUSTOMERNAME String,PHONE String,ADDRESSLINE1 String,ADDRESSLINE2 String,CITY String,STATE String,POSTALCODE String,COUNTRY String,TERRITORY String,CONTACTLASTNAME String,CONTACTFIRSTNAME String) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' STORED AS TEXTFILE
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206133838_f347c0dc-2def-40f3-8569-408909ca0c1a); Time taken: 0.191 seconds
+INFO  : OK
+No rows affected (0.297 seconds)
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> LOAD DATA inpath '/user/hive/warehouse/sales.csv' INTO table table1;
+INFO  : Compiling command(queryId=hive_20181206134444_42fa48b5-e39f-47bb-8e74-6226797c6aaf): LOAD DATA inpath '/user/hive/warehouse/sales.csv' INTO table table1
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206134444_42fa48b5-e39f-47bb-8e74-6226797c6aaf); Time taken: 0.11 seconds
+INFO  : Executing command(queryId=hive_20181206134444_42fa48b5-e39f-47bb-8e74-6226797c6aaf): LOAD DATA inpath '/user/hive/warehouse/sales.csv' INTO table table1
+INFO  : Starting task [Stage-0:MOVE] in serial mode
+INFO  : Loading data to table default.table1 from hdfs://ip-172-31-59-6.ec2.internal:8020/user/hive/warehouse/sales.csv
+INFO  : Starting task [Stage-1:STATS] in serial mode
+INFO  : Table default.table1 stats: [numFiles=1, totalSize=4160]
+INFO  : Completed executing command(queryId=hive_20181206134444_42fa48b5-e39f-47bb-8e74-6226797c6aaf); Time taken: 0.25 seconds
+INFO  : OK
+No rows affected (0.379 seconds)
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> LOAD DATA inpath '/user/hive/warehouse/sales_data.csv' INTO table table2;
+INFO  : Compiling command(queryId=hive_20181206134646_7e3dd241-5f5c-4469-9c0f-c2943445cb7e): LOAD DATA inpath '/user/hive/warehouse/sales_data.csv' INTO table table2
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206134646_7e3dd241-5f5c-4469-9c0f-c2943445cb7e); Time taken: 0.095 seconds
+INFO  : Executing command(queryId=hive_20181206134646_7e3dd241-5f5c-4469-9c0f-c2943445cb7e): LOAD DATA inpath '/user/hive/warehouse/sales_data.csv' INTO table table2
+INFO  : Starting task [Stage-0:MOVE] in serial mode
+INFO  : Loading data to table default.table2 from hdfs://ip-172-31-59-6.ec2.internal:8020/user/hive/warehouse/sales_data.csv
+INFO  : Starting task [Stage-1:STATS] in serial mode
+INFO  : Table default.table2 stats: [numFiles=1, totalSize=1281]
+INFO  : Completed executing command(queryId=hive_20181206134646_7e3dd241-5f5c-4469-9c0f-c2943445cb7e); Time taken: 0.216 seconds
+INFO  : OK
+No rows affected (0.331 seconds)
+
+
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> CREATE ROLE managers;
+INFO  : Compiling command(queryId=hive_20181206134747_a98ec75a-3a89-4ebe-8aa6-cfcadaa850cc): CREATE ROLE managers
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206134747_a98ec75a-3a89-4ebe-8aa6-cfcadaa850cc); Time taken: 0.052 seconds
+INFO  : Executing command(queryId=hive_20181206134747_a98ec75a-3a89-4ebe-8aa6-cfcadaa850cc): CREATE ROLE managers
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206134747_a98ec75a-3a89-4ebe-8aa6-cfcadaa850cc); Time taken: 0.016 seconds
+INFO  : OK
+No rows affected (0.076 seconds)
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> GRANT ROLE managers TO GROUP managers; 
+INFO  : Compiling command(queryId=hive_20181206134949_78b0556a-5a19-4e87-9781-42eeeb6c19ea): GRANT ROLE managers TO GROUP managers
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206134949_78b0556a-5a19-4e87-9781-42eeeb6c19ea); Time taken: 0.056 seconds
+INFO  : Executing command(queryId=hive_20181206134949_78b0556a-5a19-4e87-9781-42eeeb6c19ea): GRANT ROLE managers TO GROUP managers
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206134949_78b0556a-5a19-4e87-9781-42eeeb6c19ea); Time taken: 0.01 seconds
+INFO  : OK
+No rows affected (0.101 seconds)
+
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> CREATE ROLE analysts;
+INFO  : Compiling command(queryId=hive_20181206134949_fe92cf79-424c-411c-a4ad-944f82df7a27): CREATE ROLE analysts
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206134949_fe92cf79-424c-411c-a4ad-944f82df7a27); Time taken: 0.053 seconds
+INFO  : Executing command(queryId=hive_20181206134949_fe92cf79-424c-411c-a4ad-944f82df7a27): CREATE ROLE analysts
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206134949_fe92cf79-424c-411c-a4ad-944f82df7a27); Time taken: 0.008 seconds
+INFO  : OK
+No rows affected (0.071 seconds)
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> GRANT ALL ON Table default.table1 TO ROLE managers;
+INFO  : Compiling command(queryId=hive_20181206135050_e55c39a5-5230-41aa-b8ab-04589a0b6f82): GRANT ALL ON Table default.table1 TO ROLE managers
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206135050_e55c39a5-5230-41aa-b8ab-04589a0b6f82); Time taken: 0.06 seconds
+INFO  : Executing command(queryId=hive_20181206135050_e55c39a5-5230-41aa-b8ab-04589a0b6f82): GRANT ALL ON Table default.table1 TO ROLE managers
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206135050_e55c39a5-5230-41aa-b8ab-04589a0b6f82); Time taken: 0.011 seconds
+INFO  : OK
+No rows affected (0.081 seconds)
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> GRANT ROLE analysts TO GROUP analysts;
+INFO  : Compiling command(queryId=hive_20181206190303_ea73ceaf-c865-4efc-a092-0af8791524c8): GRANT ROLE analysts TO GROUP analysts
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206190303_ea73ceaf-c865-4efc-a092-0af8791524c8); Time taken: 0.051 seconds
+INFO  : Executing command(queryId=hive_20181206190303_ea73ceaf-c865-4efc-a092-0af8791524c8): GRANT ROLE analysts TO GROUP analysts
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206190303_ea73ceaf-c865-4efc-a092-0af8791524c8); Time taken: 0.01 seconds
+INFO  : OK
+No rows affected (0.082 seconds)
+
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> GRANT SELECT ON Table default.table2 TO ROLE analysts;
+INFO  : Compiling command(queryId=hive_20181206190404_742f1f72-d8fa-4fdf-ae09-76e165fee4d6): GRANT SELECT ON Table default.table2 TO ROLE analysts
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206190404_742f1f72-d8fa-4fdf-ae09-76e165fee4d6); Time taken: 0.051 seconds
+INFO  : Executing command(queryId=hive_20181206190404_742f1f72-d8fa-4fdf-ae09-76e165fee4d6): GRANT SELECT ON Table default.table2 TO ROLE analysts
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=hive_20181206190404_742f1f72-d8fa-4fdf-ae09-76e165fee4d6); Time taken: 0.007 seconds
+INFO  : OK
+No rows affected (0.068 seconds)
+
+
+## Con User1
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> select * from table1 limit 1;
+INFO  : Compiling command(queryId=hive_20181206135353_874c59d9-9011-4ec7-8827-4f138a2ed21a): select * from table1 limit 1
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:table1.ordernumber, type:string, comment:null), FieldSchema(name:table1.quantityordered, type:string, comment:null), FieldSchema(name:table1.priceeach, type:string, comment:null), FieldSchema(name:table1.orderlinenumber, type:string, comment:null), FieldSchema(name:table1.sales, type:string, comment:null), FieldSchema(name:table1.orderdate, type:string, comment:null), FieldSchema(name:table1.status, type:string, comment:null), FieldSchema(name:table1.qtr_id, type:string, comment:null), FieldSchema(name:table1.month_id, type:string, comment:null), FieldSchema(name:table1.year_id, type:string, comment:null), FieldSchema(name:table1.productline, type:string, comment:null), FieldSchema(name:table1.msrp, type:string, comment:null), FieldSchema(name:table1.productcode, type:string, comment:null), FieldSchema(name:table1.customername, type:string, comment:null), FieldSchema(name:table1.phone, type:string, comment:null), FieldSchema(name:table1.addressline1, type:string, comment:null), FieldSchema(name:table1.addressline2, type:string, comment:null), FieldSchema(name:table1.city, type:string, comment:null), FieldSchema(name:table1.state, type:string, comment:null), FieldSchema(name:table1.postalcode, type:string, comment:null), FieldSchema(name:table1.country, type:string, comment:null), FieldSchema(name:table1.territory, type:string, comment:null), FieldSchema(name:table1.contactlastname, type:string, comment:null), FieldSchema(name:table1.contactfirstname, type:string, comment:null)], properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206135353_874c59d9-9011-4ec7-8827-4f138a2ed21a); Time taken: 0.121 seconds
+INFO  : Executing command(queryId=hive_20181206135353_874c59d9-9011-4ec7-8827-4f138a2ed21a): select * from table1 limit 1
+INFO  : Completed executing command(queryId=hive_20181206135353_874c59d9-9011-4ec7-8827-4f138a2ed21a); Time taken: 0.001 seconds
+INFO  : OK
++----------------------------------------------------+-------------------------+-------------------+-------------------------+---------------+-------------------+----------------+----------------+------------------+-----------------+---------------------+--------------+---------------------+----------------------+---------------+----------------------+----------------------+--------------+---------------+--------------------+-----------------+-------------------+-------------------------+--------------------------+--+
+|                 table1.ordernumber                 | table1.quantityordered  | table1.priceeach  | table1.orderlinenumber  | table1.sales  | table1.orderdate  | table1.status  | table1.qtr_id  | table1.month_id  | table1.year_id  | table1.productline  | table1.msrp  | table1.productcode  | table1.customername  | table1.phone  | table1.addressline1  | table1.addressline2  | table1.city  | table1.state  | table1.postalcode  | table1.country  | table1.territory  | table1.contactlastname  | table1.contactfirstname  |
++----------------------------------------------------+-------------------------+-------------------+-------------------------+---------------+-------------------+----------------+----------------+------------------+-----------------+---------------------+--------------+---------------------+----------------------+---------------+----------------------+----------------------+--------------+---------------+--------------------+-----------------+-------------------+-------------------------+--------------------------+--+
+| ORDERNUMBER,QUANTITYORDERED,PRICEEACH,ORDERLINENUMBER,SALES,"ORDERDATE","STATUS",QTR_ID,MONTH_ID,YEAR_ID,"PRODUCTLINE",MSRP,"PRODUCTCODE","CUSTOMERNAME","PHONE","ADDRESSLINE1","ADDRESSLINE2","CITY","STATE","POSTALCODE","COUNTRY","TERRITORY","CONTACTLASTNAME","CONTACTFIRSTNAME" | NULL                    | NULL              | NULL                    | NULL          | NULL              | NULL           | NULL           | NULL             | NULL            | NULL                | NULL         | NULL                | NULL                 | NULL          | NULL                 | NULL                 | NULL         | NULL          | NULL               | NULL            | NULL              | NULL                    | NULL                     |
++----------------------------------------------------+-------------------------+-------------------+-------------------------+---------------+-------------------+----------------+----------------+------------------+-----------------+---------------------+--------------+---------------------+----------------------+---------------+----------------------+----------------------+--------------+---------------+--------------------+-----------------+-------------------+-------------------------+--------------------------+--+
+1 row selected (0.159 seconds)
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> select * from table2;
+Error: Error while compiling statement: FAILED: SemanticException No valid privileges
+ User user1 does not have privileges for QUERY
+ The required privileges: Server=server1->Db=default->Table=table2->Column=addressline1->action=select; (state=42000,code=40000)
+
+
+##Con User2
+
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> select * from table1;
+Error: Error while compiling statement: FAILED: SemanticException No valid privileges
+ User user2 does not have privileges for QUERY
+ The required privileges: Server=server1->Db=default->Table=table1->Column=addressline1->action=select; (state=42000,code=40000)
+0: jdbc:hive2://ip-172-31-59-6.ec2.internal:1> select * from table2 limit 1;
+INFO  : Compiling command(queryId=hive_20181206190606_5065c44a-c068-4b38-8572-c2bbde889af1): select * from table2 limit 1
+INFO  : Semantic Analysis Completed
+INFO  : Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:table2.ordernumber, type:string, comment:null), FieldSchema(name:table2.quantityordered, type:string, comment:null), FieldSchema(name:table2.priceeach, type:string, comment:null), FieldSchema(name:table2.orderlinenumber, type:string, comment:null), FieldSchema(name:table2.sales, type:string, comment:null), FieldSchema(name:table2.orderdate, type:string, comment:null), FieldSchema(name:table2.status, type:string, comment:null), FieldSchema(name:table2.qtr_id, type:string, comment:null), FieldSchema(name:table2.month_id, type:string, comment:null), FieldSchema(name:table2.year_id, type:string, comment:null), FieldSchema(name:table2.productline, type:string, comment:null), FieldSchema(name:table2.msrp, type:string, comment:null), FieldSchema(name:table2.productcode, type:string, comment:null), FieldSchema(name:table2.customername, type:string, comment:null), FieldSchema(name:table2.phone, type:string, comment:null), FieldSchema(name:table2.addressline1, type:string, comment:null), FieldSchema(name:table2.addressline2, type:string, comment:null), FieldSchema(name:table2.city, type:string, comment:null), FieldSchema(name:table2.state, type:string, comment:null), FieldSchema(name:table2.postalcode, type:string, comment:null), FieldSchema(name:table2.country, type:string, comment:null), FieldSchema(name:table2.territory, type:string, comment:null), FieldSchema(name:table2.contactlastname, type:string, comment:null), FieldSchema(name:table2.contactfirstname, type:string, comment:null)], properties:null)
+INFO  : Completed compiling command(queryId=hive_20181206190606_5065c44a-c068-4b38-8572-c2bbde889af1); Time taken: 0.11 seconds
+INFO  : Executing command(queryId=hive_20181206190606_5065c44a-c068-4b38-8572-c2bbde889af1): select * from table2 limit 1
+INFO  : Completed executing command(queryId=hive_20181206190606_5065c44a-c068-4b38-8572-c2bbde889af1); Time taken: 0.001 seconds
+INFO  : OK
++----------------------------------------------------+-------------------------+-------------------+-------------------------+---------------+-------------------+----------------+----------------+------------------+-----------------+---------------------+--------------+---------------------+----------------------+---------------+----------------------+----------------------+--------------+---------------+--------------------+-----------------+-------------------+-------------------------+--------------------------+--+
+|                 table2.ordernumber                 | table2.quantityordered  | table2.priceeach  | table2.orderlinenumber  | table2.sales  | table2.orderdate  | table2.status  | table2.qtr_id  | table2.month_id  | table2.year_id  | table2.productline  | table2.msrp  | table2.productcode  | table2.customername  | table2.phone  | table2.addressline1  | table2.addressline2  | table2.city  | table2.state  | table2.postalcode  | table2.country  | table2.territory  | table2.contactlastname  | table2.contactfirstname  |
++----------------------------------------------------+-------------------------+-------------------+-------------------------+---------------+-------------------+----------------+----------------+------------------+-----------------+---------------------+--------------+---------------------+----------------------+---------------+----------------------+----------------------+--------------+---------------+--------------------+-----------------+-------------------+-------------------------+--------------------------+--+
+| ORDERNUMBER,QUANTITYORDERED,PRICEEACH,ORDERLINENUMBER,SALES,"ORDERDATE","STATUS",QTR_ID,MONTH_ID,YEAR_ID,"PRODUCTLINE",MSRP,"PRODUCTCODE","CUSTOMERNAME","PHONE","ADDRESSLINE1","ADDRESSLINE2","CITY","STATE","POSTALCODE","COUNTRY","TERRITORY","CONTACTLASTNAME","CONTACTFIRSTNAME" | NULL                    | NULL              | NULL                    | NULL          | NULL              | NULL           | NULL           | NULL             | NULL            | NULL                | NULL         | NULL                | NULL                 | NULL          | NULL                 | NULL                 | NULL         | NULL          | NULL               | NULL            | NULL              | NULL                    | NULL                     |
++----------------------------------------------------+-------------------------+-------------------+-------------------------+---------------+-------------------+----------------+----------------+------------------+-----------------+---------------------+--------------+---------------------+----------------------+---------------+----------------------+----------------------+--------------+---------------+--------------------+-
